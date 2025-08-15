@@ -1,5 +1,5 @@
 import axios from "axios";
-import { describe, it, expect } from "vitest"; // ✅ Vitest works in Node
+import { describe, it, expect } from "vitest"; 
 import { BACKEND_URL } from "./config";
 
 const USER_NAME = Math.random().toString();

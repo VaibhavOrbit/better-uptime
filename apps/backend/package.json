@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@repo/db": "workspace: *",
+    "@repo/redisstream" : "workspace: *",
     "@repo/typescript-config": "workspace:*"
   },
   "keywords": [],
