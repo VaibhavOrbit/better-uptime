@@ -1,5 +1,5 @@
 import  express from "express"; 
-import { prismaClient } from "@repo/db/client";
+import { prismaClient } from "db/client";
 import { CrateUserInput } from "./types";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
@@ -79,7 +79,7 @@ app.post("/user/signin", async ( req , res)=> {
     }
     
 
-    const checkPassword  = await bcrypt.compare(parsedData.data.password, user.password )
+    const checkPassword  = await bcrypt.compare(parsedData.data.password, user.password)
 
     if (!checkPassword) {
          res.status(401).json({
@@ -91,7 +91,7 @@ app.post("/user/signin", async ( req , res)=> {
 
     const token  = jwt.sign({
         userId : user.id
-    }, JWT_SECRET )
+    }, JWT_SECRET)
 
     res.json({
         token
@@ -151,4 +151,4 @@ app.get("status/:websiteId", authMiddleware, async (req ,res)=> {
 })
 
 
-app.listen(3000, ()=> console.log("Server Started at PORT: 3000"));
+app.listen(3001, ()=> console.log("Server Started at PORT: 3001"));

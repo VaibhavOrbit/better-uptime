@@ -1,6 +1,8 @@
 import { createClient } from "redis";
 
-const client = await createClient()
+
+
+    const client = await createClient()
   .on("error", (err) => console.log("Redis Client Error", err))
   .connect();
 
@@ -58,3 +60,4 @@ async function xAck(consumerGroup: string, eventId: string) {
 export async function xAckBulk(consumerGroup: string, eventIds: string[]) {
     eventIds.map(eventId => xAck(consumerGroup, eventId));
 }
+
