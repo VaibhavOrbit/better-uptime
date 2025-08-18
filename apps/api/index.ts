@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
 import { authMiddleware } from "./middleware";
 import { JWT_SECRET } from "./config";
-
 const app = express(); 
 app.use(express.json());
 
@@ -149,6 +148,5 @@ app.get("status/:websiteId", authMiddleware, async (req ,res)=> {
         user_id: website.user_id
     })
 })
-
 
 app.listen(3001, ()=> console.log("Server Started at PORT: 3001"));

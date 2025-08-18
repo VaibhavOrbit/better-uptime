@@ -1,7 +1,5 @@
 import { createClient } from "redis";
 
-
-
     const client = await createClient()
   .on("error", (err) => console.log("Redis Client Error", err))
   .connect();
@@ -37,7 +35,6 @@ export async function xAddBulk(websites: WebsiteEvent[]) {
 }
 
 export async function xReadGroup(consumerGroup: string, workerId: string): Promise<MessageType[] | undefined> {
-    
     const res = await client.xReadGroup(
         consumerGroup, workerId, {
             key: STREAM_NAME,

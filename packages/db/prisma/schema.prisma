@@ -21,18 +21,18 @@ model website {
   url            String
   user_id         String
   timeAddend     DateTime
-  ticks          WebsiteTick[]
+  ticks          website_tick[]
   user           user @relation(fields: [user_id], references: [id])
 }
 
 model Region {
   id        String  @id    @default(uuid())
   name      String
-  tickes    WebsiteTick[]
+  tickes    website_tick[]
 }
 
 
-model WebsiteTick {
+model website_tick {
   id                   String  @id   @default(uuid())
   response_time_ms     Int 
   status               WebsiteStatus
