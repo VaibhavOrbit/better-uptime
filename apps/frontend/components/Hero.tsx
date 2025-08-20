@@ -10,9 +10,6 @@ export const Hero: React.FC = () => {
         const [isMenuOpen, setIsMenuOpen] = React.useState(false);
         const router = useRouter()
 
-        
-    
-
   return (
     
     <section className="pt-20 pb-20 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
@@ -66,11 +63,11 @@ export const Hero: React.FC = () => {
         )}
       </div>
     </header>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
             Monitor Your Website
-            <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent block mt-2">
+            <span className="bg-gradient-to-r text-5xl from-blue-400 to-purple-600 bg-clip-text text-transparent block mt-2">
               24/7 Uptime Tracking
             </span>
           </h1>

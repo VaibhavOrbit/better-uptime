@@ -1,7 +1,9 @@
 "use client"
-
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Monitor, Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import { BACKEND_URL } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 
 interface SignInProps {
@@ -10,17 +12,32 @@ interface SignInProps {
 }
 
  const SignIn: React.FC<SignInProps> = ({ onSwitchToSignUp, onBack }) => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
     rememberMe: false
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Sign in:', formData);
-  };
+    try {
+
+          let response = await axios.post(`${BACKEND_URL}/user/signin`, {
+        username: formData.username,
+        password: formData.password
+    })
+
+    localStorage.setItem("token", response.data.token)
+    router.push("/");
+  } catch(e) {
+    console.log("error in exios ")
+  }
+
+    } 
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -35,7 +52,9 @@ interface SignInProps {
       {/* Left Side - Text Content */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-600 to-purple-700 p-12 flex-col justify-center">
         <button
-          onClick={onBack}
+          onClick={()=> {
+            router.push("/")
+          }}
           className="flex items-center space-x-2 text-white/80 hover:text-white mb-12 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -97,17 +116,17 @@ interface SignInProps {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                Email
+              <label htmlFor="username" className="block text-sm font-medium text-gray-300 mb-2">
+                Username
               </label>
               <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
+                type="username"
+                id="username"
+                name="username"
+                value={formData.username}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                placeholder="Enter your email"
+                placeholder="Enter your username"
                 required
               />
             </div>

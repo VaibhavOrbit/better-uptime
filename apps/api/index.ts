@@ -5,8 +5,12 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
 import { authMiddleware } from "./middleware";
 import { JWT_SECRET } from "./config";
+import  cors from "cors";
+
 const app = express(); 
 app.use(express.json());
+
+app.use(cors());
 
 app.post("/user/signup", async (req , res) => {
         const parsedData = CrateUserInput.safeParse(req.body)
@@ -130,7 +134,7 @@ app.get("status/:websiteId", authMiddleware, async (req ,res)=> {
                 orderBy: [{
                     createdAt : "desc",
                 }], 
-                take : 1
+                take : 10
             }
          }
     })

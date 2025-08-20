@@ -1,6 +1,9 @@
 "use client"
 import React, { useState } from 'react';
 import { Monitor, Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import axios from 'axios';
+import { BACKEND_URL } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 interface SignUpProps {
   onSwitchToSignIn: () => void;
@@ -8,17 +11,25 @@ interface SignUpProps {
 }
 
  const SignUp: React.FC<SignUpProps> = ({ onSwitchToSignIn, onBack }) => {
+  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    username: '',
     password: '',
     agreeToTerms: false
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Sign up:', formData);
+
+    let respone = await axios.post(`${BACKEND_URL}/user/signup`, {
+      username: formData.username,
+      password: formData.password
+    })
+      localStorage.setItem("token", respone.data.token)
+     router.push("/signin")
+
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +45,9 @@ interface SignUpProps {
       {/* Left Side - Text Content */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-purple-600 to-blue-700 p-12 flex-col justify-center">
         <button
-          onClick={onBack}
+          onClick={()=> {
+            router.push("/")
+          }}
           className="flex items-center space-x-2 text-white/80 hover:text-white mb-12 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -101,9 +114,9 @@ interface SignUpProps {
               </label>
               <input
                 type="text"
-                id="name"
-                name="name"
-                value={formData.name}
+                id="username"
+                name="username"
+                value={formData.username}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                 placeholder="Enter your full name"
@@ -111,21 +124,7 @@ interface SignUpProps {
               />
             </div>
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                placeholder="Enter your email"
-                required
-              />
-            </div>
+     
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
