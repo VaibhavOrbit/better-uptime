@@ -8,10 +8,10 @@ import { useRouter } from 'next/navigation';
 
 interface SignInProps {
   onSwitchToSignUp: () => void;
-  onBack: () => void;
+
 }
 
- const SignIn: React.FC<SignInProps> = ({ onSwitchToSignUp, onBack }) => {
+ const SignIn = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -31,7 +31,7 @@ interface SignInProps {
     })
 
     localStorage.setItem("token", response.data.token)
-    router.push("/");
+    router.push("/dashboard");
   } catch(e) {
     console.log("error in exios ")
   }
@@ -97,7 +97,9 @@ interface SignInProps {
         <div className="w-full max-w-md">
           <div className="lg:hidden mb-8">
             <button
-              onClick={onBack}
+              onClick={()=>{
+                router.push("/")
+              }}
               className="flex items-center space-x-2 text-gray-400 hover:text-white mb-6 transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -189,7 +191,9 @@ interface SignInProps {
           <p className="mt-8 text-center text-sm text-gray-400">
             Don't have an account?{' '}
             <button
-              onClick={onSwitchToSignUp}
+              onClick={()=>{
+                router.push("signup")
+              }}
               className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
             >
               Sign up for free
@@ -202,3 +206,11 @@ interface SignInProps {
 };
 
 export default SignIn; 
+
+
+
+// When you click the button, React executes the arrow function, which tells Next.js to change the page to /signup.
+
+
+// onClick={router.push("signup")} ❌ → runs immediately during render (bad).
+// onClick={() => router.push("signup")} ✅ → only runs when clicked.

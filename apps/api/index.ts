@@ -113,7 +113,7 @@ app.post("/website", authMiddleware, async (req, res) => {
         // @ts-ignore
         data: {
             url : req.body.url,
-            timeAddend : new Date(), 
+            time_added : new Date(), 
             user_id : req.userId
         }
     })
@@ -123,34 +123,35 @@ app.post("/website", authMiddleware, async (req, res) => {
     })
 });
 
-app.get("status/:websiteId", authMiddleware, async (req ,res)=> {
+app.get("/status/:websiteId", authMiddleware, async (req ,res)=> {
+        
     const website = await prismaClient.website.findFirst({
         where : {
              user_id: req.userId,
-             id: req.params.websiteId,
+             id: req.params.websiteId
          },
-         include : {
+         include: {
             ticks: {
                 orderBy: [{
-                    createdAt : "desc",
-                }], 
-                take : 10
+                    createdAt: 'desc',
+                }],
+                take: 1
             }
-         }
+        }
     })
 
     if(!website) {
-        res.status(409).json({
+      return res.status(409).json({
             message: "Not fount"
-        })
-        return;
+        });
     }
 
-    res.json({
-        url: website.url,
-        id: website.id,
+     res.json({
+        url : website.url,
+        id : website.id,
         user_id: website.user_id
-    })
-})
+    });
+
+});
 
 app.listen(3001, ()=> console.log("Server Started at PORT: 3001"));

@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useMemo } from 'react';
-import { Search, Globe, CheckCircle, XCircle, Clock, TrendingUp, RefreshCw, Plus, X } from 'lucide-react';
+import { Search, Globe, CheckCircle, XCircle, Clock, RefreshCw, Plus, X } from 'lucide-react';
 
 interface Website {
   id: string;
@@ -16,14 +16,15 @@ interface AddWebsiteForm {
   name: string;
   url: string;
 }
+
 const mockWebsites: Website[] = [
   {
     id: '1',
     name: 'Main Website',
     url: 'https://example.com',
-    status: 'up',
+    status: 'down',
     responseTime: 245,
-    uptime: 99.9,
+    uptime: 80,
     lastChecked: new Date(Date.now() - 5 * 60 * 1000)
   },
   {
@@ -35,44 +36,9 @@ const mockWebsites: Website[] = [
     uptime: 99.7,
     lastChecked: new Date(Date.now() - 3 * 60 * 1000)
   },
-  {
-    id: '3',
-    name: 'Blog',
-    url: 'https://blog.example.com',
-    status: 'down',
-    responseTime: 0,
-    uptime: 95.2,
-    lastChecked: new Date(Date.now() - 8 * 60 * 1000)
-  },
-  {
-    id: '4',
-    name: 'E-commerce Store',
-    url: 'https://store.example.com',
-    status: 'up',
-    responseTime: 312,
-    uptime: 98.9,
-    
-    lastChecked: new Date(Date.now() - 2 * 60 * 1000)
-  },
-  {
-    id: '5',
-    name: 'Documentation',
-    url: 'https://docs.example.com',
-    status: 'up',
-    responseTime: 189,
-    uptime: 99.5,
-    lastChecked: new Date(Date.now() - 1 * 60 * 1000)
-  },
-  {
-    id: '6',
-    name: 'CDN Endpoint',
-    url: 'https://cdn.example.com',
-    status: 'down',
-    responseTime: 0,
-    uptime: 97.8,
-    lastChecked: new Date(Date.now() - 12 * 60 * 1000)
-  }
+
 ];
+
 
 function formatTimeAgo(date: Date): string {
   const now = new Date();
@@ -221,48 +187,7 @@ function App() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">Total Sites</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-              </div>
-              <Globe className="w-8 h-8 text-blue-600" />
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">Online</p>
-                <p className="text-2xl font-bold text-emerald-600">{stats.up}</p>
-              </div>
-              <CheckCircle className="w-8 h-8 text-emerald-600" />
-            </div>
-          </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">Offline</p>
-                <p className="text-2xl font-bold text-red-600">{stats.down}</p>
-              </div>
-              <XCircle className="w-8 h-8 text-red-600" />
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">Avg Uptime</p>
-                <p className="text-2xl font-bold text-blue-600">{stats.avgUptime.toFixed(1)}%</p>
-              </div>
-              <TrendingUp className="w-8 h-8 text-blue-600" />
-            </div>
-          </div>
-        </div>
 
         {/* Filters */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">

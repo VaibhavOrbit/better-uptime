@@ -7,10 +7,10 @@ import { useRouter } from 'next/navigation';
 
 interface SignUpProps {
   onSwitchToSignIn: () => void;
-  onBack: () => void;
+
 }
 
- const SignUp: React.FC<SignUpProps> = ({ onSwitchToSignIn, onBack }) => {
+  const SignUp =({ onSwitchToSignIn }: SignUpProps) => {
   const router = useRouter()
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -90,7 +90,9 @@ interface SignUpProps {
         <div className="w-full max-w-md">
           <div className="lg:hidden mb-8">
             <button
-              onClick={onBack}
+              onClick={()=>{
+                router.push("/")
+              }}
               className="flex items-center space-x-2 text-gray-400 hover:text-white mb-6 transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -185,7 +187,10 @@ interface SignUpProps {
           <p className="mt-8 text-center text-sm text-gray-400">
             Already have an account?{' '}
             <button
-              onClick={onSwitchToSignIn}
+              onClick={()=>{
+                router.push("/signin")
+
+              }}
               className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
             >
               Sign in

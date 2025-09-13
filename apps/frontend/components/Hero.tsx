@@ -1,12 +1,10 @@
 "use client"
 import React from 'react';
 import { Monitor, Menu, X } from 'lucide-react';
-
 import { ArrowRight, CheckCircle, AlertTriangle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-
-export const Hero: React.FC = () => {
+export const Hero = () => {
         const [isMenuOpen, setIsMenuOpen] = React.useState(false);
         const router = useRouter()
 
@@ -29,7 +27,7 @@ export const Hero: React.FC = () => {
                 router.push("/signup")
             }}
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
-              Start Free Trial
+              Signup
             </button>
 
                 <button 
@@ -55,9 +53,20 @@ export const Hero: React.FC = () => {
               <a href="#features" className="text-gray-300 hover:text-white transition-colors">Features</a>
               <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</a>
               <a href="#about" className="text-gray-300 hover:text-white transition-colors">About</a>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors text-left">
-                Start Free Trial
+              <button onClick={()=>{
+                router.push("/signup")
+              }}
+               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg  text-center">
+                Signup
               </button>
+
+            <button 
+            onClick={()=> {
+                router.push("/signin")
+            }}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+              Signin
+            </button>
             </div>
           </div>
         )}
@@ -67,22 +76,14 @@ export const Hero: React.FC = () => {
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
             Monitor Your Website
-            <span className="bg-gradient-to-r text-5xl from-blue-400 to-purple-600 bg-clip-text text-transparent block mt-2">
+            <span className="text-blue-400 text-5xl  bg-clip-text  block mt-2">
               24/7 Uptime Tracking
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
             Get instant alerts when your website goes down. Monitor performance, track uptime, and keep your business running smoothly.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold flex items-center space-x-2 transition-all duration-200 hover:scale-105">
-              <span>Start Free Trial</span>
-              <ArrowRight className="h-5 w-5" />
-            </button>
-            <button className="border-2 border-gray-600 text-gray-300 hover:border-gray-500 hover:text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors">
-              View Demo
-            </button>
-          </div>
+
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-16">
@@ -124,7 +125,6 @@ export const Hero: React.FC = () => {
           </div>
         </div>
       </div>
-
     </section>
   );
 };

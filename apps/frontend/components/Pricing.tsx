@@ -1,11 +1,12 @@
 import React from 'react';
 import { Check, Star } from 'lucide-react';
 
-export const Pricing: React.FC = () => {
+
+export const Pricing = () => {
   const plans = [
     {
       name: 'Starter',
-      price: '$9',
+      price: '$1',
       period: 'per month',
       description: 'Perfect for small websites and personal projects',
       features: [
@@ -37,7 +38,7 @@ export const Pricing: React.FC = () => {
     },
     {
       name: 'Enterprise',
-      price: '$99',
+      price: '$10',
       period: 'per month',
       description: 'For large organizations with complex needs',
       features: [
@@ -53,7 +54,7 @@ export const Pricing: React.FC = () => {
         'Custom integrations'
       ],
       popular: false
-    }
+    } 
   ];
 
   return (

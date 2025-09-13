@@ -29,6 +29,8 @@ async function main() {
     }
 }
 
+
+
 async function fetchWebsite(url: string, websiteId: string) {
     return new Promise<void>((resolve, reject) => {
         const startTime = Date.now();
@@ -60,5 +62,6 @@ async function fetchWebsite(url: string, websiteId: string) {
             })
     })
 }
+
 
 main();
